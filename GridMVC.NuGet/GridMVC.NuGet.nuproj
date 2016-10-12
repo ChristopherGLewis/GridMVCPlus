@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>c9718fea-f61f-42f8-bd4e-c29a4cc23957</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NuProjPath Condition=" '$(NuProjPath)' == '' ">$(MSBuildExtensionsPath)\NuProj\</NuProjPath>
+  </PropertyGroup>
+  <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
+  <PropertyGroup Label="Configuration">
+    <Id>GridMVC.Plus</Id>
+    <Version>3.1.6129.28218</Version>
+    <Title>GridMVC Plus</Title>
+    <Authors>Christopher G. Lewis</Authors>
+    <Owners>Christopher G. Lewis</Owners>
+    <Summary>GridMVC plus some additions</Summary>
+    <Description>GridMVC plus some addtions.  GridMVC appears to be a dead project and this is an attempt to keep it up to date.</Description>
+    <ReleaseNotes>Notes</ReleaseNotes>
+    <ProjectUrl>http://www.christopherlewis.com</ProjectUrl>
+    <LicenseUrl>http://www.christopherlewis.com</LicenseUrl>
+    <Copyright>Copyright © Christopher G. Lewis 2016</Copyright>
+    <Tags>GridMVC GridMVCPlus</Tags>
+    <DevelopmentDependency>false</DevelopmentDependency>
+    <IconUrl>http://www.christopherlewis.com</IconUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GridMvc\GridMvc.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Package content -->
+    <Content Include="..\GridMvc\content\*.*">
+      <Link>Content\Content\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="..\GridMvc\scripts\*.*">
+      <Link>Content\Scripts\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="..\GridMvc\Views\**\*.*">
+      <Link>Content\Views\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="..\GridMvc\ReleaseNotes.GridMVC.txt">
+      <Link>Content\ReleaseNotes.GridMVC.txt</Link>
+    </Content>
+    <Content Include="..\GridMvc\web.config.transform">
+      <Link>Content\web.config.transform</Link>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(NuProjPath)\NuProj.targets" />
+</Project>
