@@ -40,6 +40,8 @@ namespace GridMvc.Html
 			var newGrid = new Grid<T>(items.AsQueryable(), renderOptions);
 			////newGrid.RenderOptions = renderOptions;
 
+#if false
+
 			////deal with ?grid-filter=C1__2__text,C2__2__text2 vs ?hsGrid-filter=C1__2__text&grid-filter=C2__2__text2
 			////Parse our QueryString looking for filters that have been combined into single QS parameter's
 			//System.Collections.Specialized.NameValueCollection qs = helper.ViewContext.HttpContext.Request.QueryString;
@@ -84,6 +86,7 @@ namespace GridMvc.Html
 			//	}
 			//	helper.ViewContext.HttpContext.RewritePath(helper.ViewContext.HttpContext.Request.Path, "", newQS);
 			//}
+#endif
 
 			var htmlGrid = new HtmlGrid<T>(newGrid, helper.ViewContext, renderOptions.ViewName);
 			return htmlGrid;
