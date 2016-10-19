@@ -7,12 +7,15 @@ using System.Web.WebPages;
 using GridMvc.Columns;
 using GridMvc.Filtering;
 using GridMvc.Utility;
+using System.Web.Routing;
 
 namespace GridMvc.Html
 {
 	public static class GridExtensions
 	{
 		internal const string DefaultPartialViewName = "_Grid";
+
+		#region Grid
 
 		public static HtmlGrid<T> Grid<T>(this HtmlHelper helper, IEnumerable<T> items)
 			where T : class
@@ -107,6 +110,7 @@ namespace GridMvc.Html
 			var htmlGrid = new HtmlGrid<T>(sourceGrid, helper.ViewContext, viewName);
 			return htmlGrid;
 		}
+		#endregion
 
 		//support IHtmlString in RenderValueAs method
 		public static IGridColumn<T> RenderValueAs<T>(this IGridColumn<T> column, Func<T, IHtmlString> constraint)
@@ -121,5 +125,57 @@ namespace GridMvc.Html
 			Func<T, string> valueContraint = a => constraint(a)(null).ToHtmlString();
 			return column.RenderValueAs(valueContraint);
 		}
+
+
+		#region GridViewQueryStringRouteWithID
+		//Helper to add the current page's query strings to the RouteValueDictionary to pass grid filter & pager
+		//settings through CRUD subpages
+		
+		public static RouteValueDictionary GridViewQueryStringRouteWithID(this HtmlHelper html)
+		{
+			return GridViewQueryStringRouteWithID(html, null);
+		}
+
+		public static RouteValueDictionary GridViewQueryStringRouteWithID(this HtmlHelper html, int? ID)
+		{
+			string queryString = (new CustomQueryStringBuilder( html.ViewContext.RequestContext.HttpContext.Request.QueryString)) .ToString();
+			return GridViewQueryStringRouteWithID(html, ID, queryString);
+		}
+
+		public static RouteValueDictionary GridViewQueryStringRouteWithID(this HtmlHelper html, int? ID, string queryString)
+		{
+			RouteValueDictionary rvd = new RouteValueDictionary();
+			if (ID.HasValue) {
+				rvd.Add("id", ID.Value);
+			}
+
+			//Decode our QueryString
+			string qs = HttpUtility.UrlDecode(queryString);
+			if (qs.StartsWith("?")) {
+				qs = qs.Substring(1);
+			}
+
+			if (!string.IsNullOrEmpty(qs)) {
+				string[] qaArray = qs.Split('&');
+				foreach (var item in qaArray) {
+					if (item.Contains('=')) {
+						string[] parmArray = item.Split('=');
+						if (parmArray.Count() > 1) {
+							//add or update?
+							if (rvd.Keys.Contains(parmArray[0].ToString())) {
+								rvd[parmArray[0].ToString()] += "," + parmArray[1].ToString();
+							} else {
+								rvd.Add(parmArray[0].ToString(), parmArray[1]);
+							}
+						}
+					}
+				}
+			}
+
+			return rvd;
+		}
+
+		#endregion
+
 	}
 }

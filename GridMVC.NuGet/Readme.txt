@@ -22,5 +22,8 @@ Release Notes:
 	  For example, a URL that is http://localhost/Site//UI/MyPage?grid-filter=Col1__2__new&grid-filter=Col2__2__1
 	  would look like http://localhost/Site//UI/MyPage?grid-filter=Col1__2__new,Col2__2__1 when passed through a 
 	  RouteValueDictionary call
+	Added an Html Helper to add the current page's query strings to the RouteValueDictionary to pass grid 
+	  filter & pager settings through CRUD subpages
+
 
 

@@ -19,7 +19,7 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>GridMVC.Plus</Id>
-    <Version>3.1.6129.28218</Version>
+    <Version>3.1.6136.24558</Version>
     <Title>GridMVC Plus</Title>
     <Authors>Christopher G. Lewis</Authors>
     <Owners>Christopher G. Lewis</Owners>
