@@ -229,6 +229,7 @@
     </Content>
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
+    <None Include="README.md" />
     <None Include="web.config.transform" />
   </ItemGroup>
   <ItemGroup>
